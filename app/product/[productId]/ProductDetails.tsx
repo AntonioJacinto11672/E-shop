@@ -5,6 +5,24 @@ import { Rating } from "@mui/material";
 interface ProductDetailsProps {
     product: any
 }
+export type CartProductType = {
+    id: string,
+    name: string,
+    description: string,
+    category: string,
+    brand: string,
+    selectedImg: SelectedImageType,
+    quantity: number,
+    price: number
+};
+
+export type SelectedImageType = {
+    color: string,
+    colorCode: string,
+    image: string,
+};
+
+
 
 const Horizontal = ()  =>  <hr className="w-[30%]  my-2"/>
 
@@ -32,6 +50,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                 <span className="font-semibold">Brand:</span> {product[0].brand }
             </div>
             <div className={product[0].inStock ? 'text-teal-400' : 'text-rose-400'}> { product[0].inStock ? 'In Stock' : 'Out Stock'}</div>
+            <Horizontal />
+            <div>Color</div>
+            <Horizontal />
+            <div>Quality</div>
+            <Horizontal />
+            <div>add to Cart</div>
         </div>
     </div>);
 }
