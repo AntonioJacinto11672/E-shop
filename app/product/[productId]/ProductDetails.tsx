@@ -1,8 +1,11 @@
 'use client'
 
+import Button from "@/app/components/Button";
+import ProductImage from "@/app/components/products/ProductImage";
 import SetColor from "@/app/components/products/SetColor";
 import SetQuantity from "@/app/components/products/SetQuantity";
 import { Rating } from "@mui/material";
+import Image from "next/image";
 import { useCallback, useState } from "react"; /* Gambiarra porque não aceita o use cliente */
 
 interface ProductDetailsProps {
@@ -47,28 +50,41 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     const ProductRating = product.reviews.reduce((acc: number,
         item: any) => item.rating + acc, 0) / product.reviews.length
 
-    const handleQtyIncrease = useCallback(() => {
-        setCartProduct((prev) => {
-            return { ...prev, quantity: prev.quantity }
-        });
-
-    }, [])
-
-    const handleQtyDecrease = useCallback(() => {
-        setCartProduct((prev) => {
-            return { ...prev, --quantity: prev.quantity }
-        });
-
-    }, [cartProduct])
 
     const handleColorSelect = useCallback((value: SelectedImageType) => {
         setCartProduct((prev) => {
             return { ...prev, selectedImg: value }
         })
     }, [cartProduct.selectedImg])
+
+
+    const handleQtyIncrease = useCallback(() => {
+        if(cartProduct.quantity === 99) {
+            return;
+        }
+
+        setCartProduct((prev) => {
+            return { ...prev, quantity: ++prev.quantity }
+        })
+    }, [cartProduct]);
+
+    const handleQtyDecrease = useCallback(() => {
+
+        if (cartProduct.quantity === 1) {
+            return;
+        }
+
+        setCartProduct((prev) => {
+
+            return { ...prev, quantity: --prev.quantity }
+        })
+    }, [cartProduct]);
+
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>Imagem</div>
+            
+            <ProductImage  cartProduct={cartProduct} product={product} handleColorSelect={handleColorSelect}/>
             <div>
                 <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
                 <div>
@@ -99,7 +115,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                     handleQtyIncrease={handleQtyIncrease}
                 />
                 <Horizontal />
-                <div>add to Cart</div>
+                <div className="max-w-[300px]">
+                    <Button 
+                    
+                    label="Add To Cart"
+                    onClick={() => {}}
+                /></div>
             </div>
         </div>);
 }

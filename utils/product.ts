@@ -12,22 +12,22 @@ export const product =
         {
             color: "white",
             colorCode: "#FFFFFF",
-            image: "/iphone 12-rgb.png"
+            image: "/iphone_12-rbg.png"
         },
         {
             color: "red",
             colorCode: "#cf0f02",
-            image: "/iphone 12_vermelho-rgb.png"
+            image: "/iphone_12_vermelho-rbg.png"
         },
         {
             color: "black",
             colorCode: "#000000",
-            image: "/iphone 12_preto-rgb.png"
+            image: "/iphone_12_preto-rbg.png"
         },
         {
             color: "purple",
             colorCode: "#800080",
-            image: "/iphone 12_purple-rgb.png"
+            image: "/iphone 12 purple.png"
         }
     ],
     reviews: [
