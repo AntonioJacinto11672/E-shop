@@ -62,7 +62,7 @@ export const product =
                 name: "Manuel Jacinto",
                 email: "antjacinto11672@gmail.com",
                 emailVerifield: null,
-                image: "/user.png",
+                image: "/user.jpeg",
                 hashedPassword: null,
                 createAt: "2023-06-26T15:40:52.558Z",
                 updateAt: "2023-06-26T15:40:52.558Z",

@@ -4,6 +4,7 @@ import Button from "@/app/components/Button";
 import ProductImage from "@/app/components/products/ProductImage";
 import SetColor from "@/app/components/products/SetColor";
 import SetQuantity from "@/app/components/products/SetQuantity";
+import { useCart } from "@/hooks/useCart";
 import { Rating } from "@mui/material";
 import Image from "next/image";
 import { useCallback, useState } from "react"; /* Gambiarra porque não aceita o use cliente */
@@ -33,6 +34,8 @@ export type SelectedImageType = {
 const Horizontal = () => <hr className="w-[30%]  my-2" />
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+    /* const [cartTotalQty] = useCart() */
+    
     const [cartProduct, setCartProduct] =
         useState<CartProductType>({
             id: product.id,
