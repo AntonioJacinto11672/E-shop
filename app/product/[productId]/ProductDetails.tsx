@@ -9,6 +9,7 @@ import { Rating } from "@mui/material";
 import Image from "next/image";
 import { useCallback, useState } from "react"; /* Gambiarra porque não aceita o use cliente */
 
+
 interface ProductDetailsProps {
     product: any
 }
@@ -34,8 +35,8 @@ export type SelectedImageType = {
 const Horizontal = () => <hr className="w-[30%]  my-2" />
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
-    /* const [cartTotalQty] = useCart() */
-    
+const {handleAddProductToCart, cartProducts} = useCart()
+
     const [cartProduct, setCartProduct] =
         useState<CartProductType>({
             id: product.id,
@@ -48,8 +49,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
             price: product.price
         })
 
-    console.log(cartProduct)
-
+        console.log(cartProducts)
     const ProductRating = product.reviews.reduce((acc: number,
         item: any) => item.rating + acc, 0) / product.reviews.length
 
@@ -62,7 +62,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
 
     const handleQtyIncrease = useCallback(() => {
-        if(cartProduct.quantity === 99) {
+        if (cartProduct.quantity === 99) {
             return;
         }
 
@@ -86,8 +86,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            
-            <ProductImage  cartProduct={cartProduct} product={product} handleColorSelect={handleColorSelect}/>
+
+            <ProductImage cartProduct={cartProduct} product={product} handleColorSelect={handleColorSelect} />
             <div>
                 <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
                 <div>
@@ -119,11 +119,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                 />
                 <Horizontal />
                 <div className="max-w-[300px]">
-                    <Button 
-                    
-                    label="Add To Cart"
-                    onClick={() => {}}
-                /></div>
+                    <Button
+
+                        label="Add To Cart"
+                        onClick={() => handleAddProductToCart(cartProduct)}
+                    /></div>
             </div>
         </div>);
 }
