@@ -38,6 +38,7 @@ const Horizontal = () => <hr className="w-[30%]  my-2" />
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     const { handleAddProductToCart, cartProducts } = useCart()
     const [isProductInCart, setIsProductInCart] = useState(false)
+    
     const [cartProduct, setCartProduct] =
         useState<CartProductType>({
             id: product.id,

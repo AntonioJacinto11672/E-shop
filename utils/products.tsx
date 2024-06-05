@@ -3,6 +3,7 @@ export const products = [
         id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
         name: 'Delba de Oliveira',
         description: 'delba@oliveira.com',
+        price: 5000,
         images: [
             {
                 color: "white",
