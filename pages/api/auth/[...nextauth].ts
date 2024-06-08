@@ -6,7 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt"
 
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export default NextAuth({
     adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
