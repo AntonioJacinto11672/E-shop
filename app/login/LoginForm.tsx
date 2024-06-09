@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import Input from "../inputs/Input";
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
@@ -10,11 +10,14 @@ import { AiOutlineGoogle } from "react-icons/ai";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { safeUser } from "@/types";
 
 
+interface LoginFormProps {
+    currentUser: safeUser | null
+}
 
-
-const LoginForm = () => {
+const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
     const [isLoading, setIsLoading] = useState(false)
     const {
         register,
@@ -28,6 +31,13 @@ const LoginForm = () => {
     })
 
     const router = useRouter()
+
+    useEffect(() => {
+        if (currentUser) {
+            router.push("/cart")
+            router.refresh()
+        }
+    }, [])
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true)
         console.log(data)
@@ -46,6 +56,9 @@ const LoginForm = () => {
             }
         })/* .catch(() => toast.error("Something went wrong"))
             .finally(() => { setIsLoading(false) }) */
+    }
+    if (currentUser) {
+        return <p className="text.center">Logged in Redirecting...</p>
     }
 
     return (
