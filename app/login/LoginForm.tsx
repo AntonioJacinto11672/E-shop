@@ -44,8 +44,8 @@ const LoginForm = () => {
             if (callback?.error) {
                 toast.error(callback.error)
             }
-        }).catch(() => toast.error("Something went wrong"))
-            .finally(() => { setIsLoading(false) })
+        })/* .catch(() => toast.error("Something went wrong"))
+            .finally(() => { setIsLoading(false) }) */
     }
 
     return (
