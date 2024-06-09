@@ -1,5 +1,5 @@
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
  
@@ -8,50 +8,56 @@ generator client {
 }
  
 model User {
-  id            String          @id  @default(cuid())
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
-  username      String?         @unique
   email         String?         @unique
   emailVerified DateTime?
   image         String?
+  hashedPassword String?
+  accounts      Account[]
+  createAt DateTime @default(now())
+  updateAT DateTime @updatedAt
+  role Role @default(USER)
 
-  Account       Account?
+  
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+enum Role{
+    USER
+    ADMIN
+}
  
 model Account {
-  id                       String  @id @default(cuid())
-  userId                   String  @unique
-  type                     String
-  provider                 String
-  providerAccountId        String
-  refresh_token            String? @db.Text
-  access_token             String? @db.Text
-  expires_at               Int?
-  token_type               String?
-  scope                    String?
-  id_token                 String? @db.Text
-  session_state            String?
-  refresh_token_expires_in Int?
-  user                     User?   @relation(fields: [userId], references: [id])
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
   @@unique([provider, providerAccountId])
-  @@index([userId])
 }
  
 
- 
 // Optional for WebAuthn support
 model Authenticator {
-  credentialID         String  @unique
-  userId               String
+  credentialID         String  @id @map("_id")
+  userId               String  @db.ObjectId
   providerAccountId    String
   credentialPublicKey  String
   counter              Int
@@ -61,5 +67,5 @@ model Authenticator {
  
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
-  @@id([userId, credentialID])
+  @@unique([userId, credentialID])
 }

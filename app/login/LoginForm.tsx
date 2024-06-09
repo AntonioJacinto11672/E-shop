@@ -7,6 +7,11 @@ import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import Button from "../components/Button";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+
+
 
 
 const LoginForm = () => {
@@ -22,17 +27,31 @@ const LoginForm = () => {
         }
     })
 
+    const router = useRouter()
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        setIsLoading(true)
+        console.log(data)
+        signIn('credentials', {
+            ...data,
+            redirect: false
+        }).then((callback) => {
             setIsLoading(true)
-            console.log(data)
-
-        console.log("Clicou")
-    } 
+            if (callback?.ok) {
+                router.push("/cart")
+                router.refresh()
+                toast.success('Logged in')
+            }
+            if (callback?.error) {
+                toast.error(callback.error)
+            }
+        }).catch(() => toast.error("Something went wrong"))
+            .finally(() => { setIsLoading(false) })
+    }
 
     return (
         <>
             <Heading title="Sun in to E-Shop" />
-            <Button outline  label="Continue with Google" icon={AiOutlineGoogle} onClick={() => {}} />
+            <Button outline label="Continue with Google" icon={AiOutlineGoogle} onClick={() => { }} />
             <hr className="bg-slate-300 w-full h-px" />
             <Input
                 id="email"
@@ -51,7 +70,7 @@ const LoginForm = () => {
                 required
                 type="password"
             />
-            <Button label={isLoading ? "Loading" : "Sign Up"} onClick={handleSubmit(onSubmit)}/>
+            <Button label={isLoading ? "Loading" : "Sign Up"} onClick={handleSubmit(onSubmit)} />
             <p>Do not have an acount? <Link className="text-sm" href={"/register"}>Sign up</Link></p>
         </>);
 }

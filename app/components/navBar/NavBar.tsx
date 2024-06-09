@@ -2,6 +2,7 @@ import Link from "next/link";
 import Container from "../Container"
 import { Redressed } from "next/font/google";
 import CartCount from "./CartCount";
+import UserMenu from "./UserMenu";
 const redressed = Redressed({ subsets: ['latin'], weight: ['400'] })
 const NavBar = () => {
     return (<div className=" 
@@ -17,11 +18,11 @@ const NavBar = () => {
                 <div className="flex justify-between gap-3 md:gap-30">
                     <Link href="/"
                         className={`${redressed.className} font-bold text-2xl`}
-                     >E-Shop</Link>
+                    >E-Shop</Link>
                     <div className="hidden md:block">Search</div>
                     <div className="flex gap-8 md:gap-30">
                         <CartCount />
-                        <div>UserMenu</div>
+                        <UserMenu />
                     </div>
                 </div>
             </Container>

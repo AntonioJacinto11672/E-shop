@@ -42,16 +42,17 @@ const RegisterForm = () => {
                     email: data.email,
                     password: data.password,
                     redirect: false,
-                }).then((callback) => {
-                    if (callback?.ok) {
-                        router.push("/cart")
-                        router.refresh()
-                        toast.success('Logged in')
-                    }
-                    if (callback?.error) {
-                        toast.error(callback.error)
-                    }
-                });
+                })
+                    .then((callback) => {
+                        if (callback?.ok) {
+                            router.push("/cart")
+                            router.refresh()
+                            toast.success('Logged in')
+                        }
+                        if (callback?.error) {
+                            toast.error(callback.error)
+                        }
+                    });
             })
             .catch(() => toast.error("Something went wrong"))
             .finally(() => { setIsLoading(false) })
