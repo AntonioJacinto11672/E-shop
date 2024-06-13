@@ -3,6 +3,7 @@
 import { useCart } from "@/hooks/useCart";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import CheckoutForm from "./CheckoutForm";
 
 const CheckoutClient = () => {
     const { cartProducts, paymentIntent, handleSetPaymentIntent } = useCart()
@@ -34,7 +35,7 @@ const CheckoutClient = () => {
 
         }
     })
-    return <></>
+    return <CheckoutForm />
 }
 
 export default CheckoutClient;

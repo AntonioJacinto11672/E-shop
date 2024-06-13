@@ -1,5 +1,5 @@
-import Container from "../Container";
-import FormWrap from "../FormWrap";
+import Container from "../components/Container";
+import FormWrap from "../components/FormWrap";
 import CheckoutClient from "./CheckoutClient";
 
 const Checkout = () => {
