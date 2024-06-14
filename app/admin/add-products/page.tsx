@@ -7,12 +7,12 @@ import AddProductForm from "./AddProductForm";
 const AddProducs = async () => {
     const currentUser = await getCurrentUser()
    
-    console.log("Dados ", currentUser)
 
-    /* 
-    if(!currentUser || currentUser.role === "ADMIN"){
+    console.log("Current user",currentUser?.role)
+    
+    if(!currentUser || currentUser.role !== "ADMIN"){
         return <NullData title="Ooops!  Access dinied " />
-    } */
+    }
 
     return (<div className="p-8">
         <Container>
