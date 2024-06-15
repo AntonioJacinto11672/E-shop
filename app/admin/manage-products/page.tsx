@@ -1,21 +1,29 @@
 import getCurrentUser from "@/actions/getCurrentUser";
-import getUsers from "@/actions/getUsers";
 import Container from "@/app/components/Container";
-import NullData from "@/app/components/NullData";
+import ManageProductsClient from "./ManageProductsClient";
+import getProducts from "@/actions/getProdutus";
+import getUsers from "@/actions/getUsers";
+
 
 const ManageProducts = async () => {
-    const currentUser = await getCurrentUser()
-    const products = await getUsers({category: null})
+    
+    /* const currentUser = await getCurrentUser()
    
 
+    console.log("Current user",currentUser?.role)
     
     if(!currentUser || currentUser.role !== "ADMIN"){
         return <NullData title="Ooops!  Access dinied " />
-    }
+    } */
+
+   const products = await getProducts({category: null});
+   const getUser = await getUsers({category: null})
+
+   console.log("products filter >>>> ", products)
     return (
         <div className="pt-8">
             <Container>
-                <ManageProducts />
+                <ManageProductsClient products={products}/>
             </Container>
         </div>
     );

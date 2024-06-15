@@ -1,13 +1,13 @@
 import { products } from '@/utils/products';
 import prisma from '@/libs/prismadb'
 
-export interface IProductParams {
+export interface IUsersParams {
     category?: string | null
     searchTerm?: string | null
 }
 
 
-export default async function getUsers(params: IProductParams) {
+export default async function getUsers(params: IUsersParams) {
     try {
         const { category, searchTerm } = params
         let searchString = searchTerm

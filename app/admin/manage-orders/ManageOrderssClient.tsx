@@ -11,10 +11,10 @@ import toast from "react-hot-toast";
 import { MdCached, MdClose, MdDelete, MdDone, MdRemoveRedEye } from "react-icons/md";
 
 
-interface ManageProductsClientProps {
+interface ManageOrderssClientClientProps {
     products?: any[]
 }
-const ManageProductsClient: React.FC<ManageProductsClientProps> = ({ products }) => {
+const ManageOrderssClientClient: React.FC<ManageOrderssClientClientProps> = ({ products }) => {
     const router = useRouter()
     let rows: any = []
     if (products) {
@@ -120,4 +120,4 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({ products })
         </div>);
 }
 
-export default ManageProductsClient;
+export default ManageOrderssClientClient;
